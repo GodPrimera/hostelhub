@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Add room | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'rooms'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Rooms / <strong>Add room</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <% const isEdit=!!room; %>
+                            <h1>
+                                <%= isEdit ? 'Edit Room' : 'Add a room' %>
+                            </h1>
+                            <p>Set its residence, capacity and starting occupancy.</p>
+                    </div>
+                </section>
+                <form class="card form-card" action="<%= room ? '/rooms/' + room._id : '/rooms' %>" method="post">
+                    <div class="head">
+                        <h2>Room details</h2><span class="badge gray">Draft</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="field"><label for="roomNumber">Room number</label><input id="roomNumber"
+                                name="roomNumber" placeholder="e.g. UH-204" value="<%= room ? room.roomNumber : '' %>"
+                                required></div>
+                        <div class="field"><label for="hostel">Hostel</label><select id="hostel" name="hostel" required>
+                                <option value="">Select a hostel</option>
+
+                                <% hostels.forEach((hostel)=> { %>
+
+                                    <option value="<%= hostel._id %>" <%=room &&
+                                        String(room.hostel)===String(hostel._id) ? 'selected' : '' %>
+                                        >
+                                        <%= hostel.name %>
+                                    </option>
+
+                                    <% }) %>
+                            </select></div>
+                        <div class="field"><label for="capacity">Room capacity</label><input id="capacity"
+                                name="capacity" type="number" min="1" placeholder="e.g. 4"
+                                value="<%= room ? room.capacity : '' %>" required></div>
+                        <div class="field"><label for="occupiedSpaces">Occupied spaces</label><input id="occupiedSpaces"
+                                name="occupiedSpaces" type="number" min="0" value="<%= room ? room.occupiedSpaces : 0 %>" required></div>
+                    </div>
+                    <div class="form-actions"><a class="secondary" href="/rooms">Cancel</a><button class="button"
+                            type="submit">Create room →</button></div>
+                </form>
+            </main>
+    </div>
+</body>
+
+</html>

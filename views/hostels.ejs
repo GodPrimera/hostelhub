@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Hostels | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'hostels'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Management / <strong>Hostels</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Hostel management</h1>
+                        <p>Keep every residence organised, visible and ready for students.</p>
+</div><a class="button" href="/hostels/new">+ Add hostel</a>
+                </section>
+                <section class="grid">
+                    <% if (!hostels.length) { %><article class="tile"><div class="tile-icon">⌂</div><h2>No hostels yet</h2><p>Add your first hostel to begin managing rooms and capacity.</p></article><% } %>
+                    <% hostels.forEach((hostel) => { %><article class="tile">
+                        <div class="tile-top"><span class="tile-icon">⌂</span><span class="badge <%= hostel.available ? '' : 'amber' %>"><%= hostel.available ? 'Active' : 'Full' %></span></div>
+                        <h2><%= hostel.name %></h2><p><%= hostel.location %> · <%= hostel.roomCount %> room<%= hostel.roomCount === 1 ? '' : 's' %></p>
+                        <div class="progress"><i style="width:<%= hostel.occupancy %>%"></i></div><p><strong><%= hostel.occupancy %>%</strong> occupancy · <%= hostel.available %> space<%= hostel.available === 1 ? '' : 's' %> available</p>
+                    </article><% }) %>
+                </section>
+            </main>
+    </div>
+</body>
+
+</html>

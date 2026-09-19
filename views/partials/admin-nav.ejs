@@ -1,0 +1,22 @@
+<aside class="side">
+    <div class="logo"><span class="mark">⌂</span>HostelHub</div>
+    <p class="label">OVERVIEW</p>
+    <nav class="nav">
+        <a href="/dashboard"><b>▦</b>Dashboard</a>
+        <a class="<%= page === 'hostels' ? 'active' : '' %>" href="/hostels"><b>⌂</b>Hostels</a>
+        <a class="<%= page === 'rooms' ? 'active' : '' %>" href="/rooms"><b>▣</b>Rooms</a>
+        <a class="<%= page === 'residents' ? 'active' : '' %>" href="/residents"><b>♙</b>Residents</a>
+        <a class="<%= page === 'bookings' ? 'active' : '' %>" href="/bookings"><b>▤</b>Bookings</a>
+    </nav>
+    
+    <p class="label" style="margin-top:30px">MANAGEMENT</p>
+    
+    <nav class="nav">
+        <a class="<%= page === 'reports' ? 'active' : '' %>" href="/reports"><b>◔</b>Reports</a>
+        <a class="<%= page === 'settings' ? 'active' : '' %>" href="/settings"><b>⚙</b>Settings</a>
+    </nav>
+
+    <div class="profile"><span class="avatar">AF</span>
+        <div><strong>Hostel Manager</strong><span>Administrator</span></div>
+    </div>
+</aside>

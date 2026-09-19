@@ -1,0 +1,28 @@
+const express = require('express');
+const checkAuthenticated = require('../middlewares/checkAuthenticated');
+const dashboardController = require('../controllers/dashboardController')
+
+const router = express.Router();
+
+router.get('/', checkAuthenticated, dashboardController.showDashboard);
+router.get('/dashboard', checkAuthenticated, dashboardController.showDashboard);
+router.get('/hostels', checkAuthenticated, dashboardController.showHostels);
+router.get('/bookings', checkAuthenticated, dashboardController.showBookings);
+router.get('/reports', checkAuthenticated, dashboardController.showReports);
+router.get('/residents', checkAuthenticated, dashboardController.showResidents);
+router.get('/rooms', checkAuthenticated, dashboardController.showRooms);
+router.get('/settings', checkAuthenticated, dashboardController.showSettings);
+router.get('/hostels/new', checkAuthenticated, dashboardController.showAddHostel);
+router.get('/rooms/new', checkAuthenticated, dashboardController.showAddRoom);
+router.get('/residents/new', checkAuthenticated, dashboardController.showAddResident);
+router.get('/bookings/new', checkAuthenticated, dashboardController.showAddBooking);
+router.get('/rooms/:id/edit', checkAuthenticated, dashboardController.showEditRoom)
+
+router.post('/hostels/new', checkAuthenticated, dashboardController.addHostel);
+router.post('/rooms/new', checkAuthenticated, dashboardController.addRoom);
+router.post('/residents/new', checkAuthenticated, dashboardController.addResident)
+router.post('/bookings/new', checkAuthenticated, dashboardController.addBooking)
+
+
+
+module.exports = router;

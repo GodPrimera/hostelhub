@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Rooms | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'rooms'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Management / <strong>Rooms</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Room inventory</h1>
+                        <p>Monitor capacity and availability across all residences.</p>
+</div><a class="button" href="/rooms/new">+ Add room</a>
+                </section>
+                <section class="stats">
+                    <article class="stat"><span>Total rooms</span><strong><%= rooms.length %></strong></article>
+                    <article class="stat"><span>Available spaces</span><strong><%= summary.available %></strong></article>
+                    <article class="stat"><span>Occupancy</span><strong><%= summary.occupancy %>%</strong></article>
+                </section>
+                <section class="card">
+                    <div class="head">
+                        <h2>All rooms</h2>
+                        <div class="tools"><input class="search" placeholder="Search a room"><select class="filter">
+                                <option>All hostels</option><% hostels.forEach((hostel) => { %><option value="<%= hostel._id %>"><%= hostel.name %></option><% }) %>
+                            </select><select class="filter">
+                                <option>All statuses</option>
+                            </select></div>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Room</th>
+                                    <th>Hostel</th>
+                                    <th>Capacity</th>
+                                    <th>Occupied</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody><% if (!rooms.length) { %><tr><td colspan="6">No rooms yet. Add a room to start tracking capacity.</td></tr><% } %><% rooms.forEach((room) => { const full = room.occupiedSpaces >= room.capacity; %><tr><td class="name"><%= room.roomNumber %></td><td><%= room.hostel?.name || 'Unassigned' %></td><td><%= room.capacity %> student<%= room.capacity === 1 ? '' : 's' %></td><td><%= room.occupiedSpaces %> / <%= room.capacity %></td><td><span class="badge <%= full ? 'amber' : '' %>"><%= full ? 'Full' : 'Available' %></span></td><td class="dots"><a href="/rooms/<%= room._id %>/edit" class="edit">Edit</a><button type="button" class="delete">Delete</button></td></tr><% }) %></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+    </div>
+</body>
+
+</html>

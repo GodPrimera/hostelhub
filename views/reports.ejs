@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Reports | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'reports'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Management / <strong>Reports</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Reports & insights</h1>
+                        <p>A clear picture of utilisation and resident movement.</p>
+                    </div><button class="button">Download report ↓</button>
+                </section>
+                <section class="stats">
+                    <article class="stat"><span>Average occupancy</span><strong>89%</strong></article>
+                    <article class="stat"><span>Bookings this month</span><strong>186</strong></article>
+                    <article class="stat"><span>Available capacity</span><strong>128</strong></article>
+                </section>
+                <section class="split">
+                    <article class="card">
+                        <div class="head">
+                            <h2>Occupancy by residence</h2><select class="filter">
+                                <option>Current term</option>
+                            </select>
+                        </div>
+                        <div class="report">
+                            <div class="barwrap">
+                                <div class="bar hot" style="height:142px"></div>Unity
+                            </div>
+                            <div class="barwrap">
+                                <div class="bar hot" style="height:166px"></div>Harmony
+                            </div>
+                            <div class="barwrap">
+                                <div class="bar" style="height:113px"></div>Scholar
+                            </div>
+                            <div class="barwrap">
+                                <div class="bar hot" style="height:175px"></div>Hilltop
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="head">
+                            <h2>Capacity health</h2>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Rooms at capacity</h3>
+                                <p>52 rooms need availability monitoring.</p>
+                            </div><span class="badge amber">52</span>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Rooms with open spaces</h3>
+                                <p>128 places available for allocation.</p>
+                            </div><span class="badge">128</span>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Pending bookings</h3>
+                                <p>14 requests require review.</p>
+                            </div><span class="badge gray">14</span>
+                        </div>
+                    </article>
+                </section>
+            </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Settings | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'settings'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Management / <strong>Settings</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Workspace settings</h1>
+                        <p>Manage the preferences for your HostelHub workspace.</p>
+                    </div><button class="button green">Save changes</button>
+                </section>
+                <section class="split">
+                    <article class="card">
+                        <div class="head">
+                            <h2>Organisation profile</h2>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Institution name</h3>
+                                <p>University of Buea · Hostel Services</p>
+                            </div><span class="dots">Edit</span>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Academic year</h3>
+                                <p>2026/2027</p>
+                            </div><span class="dots">Edit</span>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Default booking duration</h3>
+                                <p>One academic year</p>
+                            </div><span class="dots">Edit</span>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="head">
+                            <h2>Notifications</h2>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>New booking alerts</h3>
+                                <p>Receive a notification when a booking is created.</p>
+                            </div><span class="switch on"><i></i></span>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Capacity warnings</h3>
+                                <p>Alert managers when a room reaches full capacity.</p>
+                            </div><span class="switch on"><i></i></span>
+                        </div>
+                        <div class="setting">
+                            <div>
+                                <h3>Weekly summary</h3>
+                                <p>Receive a weekly operations summary by email.</p>
+                            </div><span class="switch"><i></i></span>
+                        </div>
+                    </article>
+                </section>
+            </main>
+    </div>
+</body>
+
+</html>

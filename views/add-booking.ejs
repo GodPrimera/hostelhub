@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Create booking | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'bookings'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Bookings / <strong>Create booking</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Create a booking</h1>
+                        <p>Assign a registered resident to an available room.</p>
+                    </div>
+                </section>
+                <form class="card form-card" action="#" method="post">
+                    <div class="head">
+                        <h2>Booking details</h2><span class="badge gray">Draft</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="field"><label for="StudentId">Resident Student ID</label><input id="resident"
+                                name="studentId" type="text" placeholder="Enter the resident's Student ID"
+                                autocomplete="off" required></div>
+                        <div class="field"><label for="room">Available room</label><select id="room" name="room"
+                                required>
+                                <option value="">Select a room</option>
+                                <% rooms.forEach((room)=> { %><option value="<%= room._id %>">
+                                        <%= room.hostel?.name || 'Hostel' %> · <%= room.roomNumber %> (<%= room.capacity
+                                                    - room.occupiedSpaces %> space<%= room.capacity -
+                                                        room.occupiedSpaces===1 ? '' : 's' %>)
+                                    </option>
+                                    <% }) %>
+                            </select></div>
+                        <div class="field"><label for="checkInDate">Check-in date</label><input id="checkInDate"
+                                name="checkInDate" type="date" required></div>
+                        <div class="field"><label for="checkOutDate">Expected check-out</label><input id="checkOutDate"
+                                name="checkOutDate" type="date"></div>
+                    </div>
+                    <div class="form-actions"><a class="secondary" href="/bookings">Cancel</a><button class="button"
+                            type="submit">Create booking →</button></div>
+                </form>
+            </main>
+    </div>
+</body>
+
+</html>

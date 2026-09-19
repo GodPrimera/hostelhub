@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Add hostel | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'hostels'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Hostels / <strong>Add hostel</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Add a hostel</h1>
+                        <p>Create a residence profile before adding rooms and allocations.</p>
+                    </div>
+                </section>
+                <form class="card form-card" action="/hostels/new" method="post">
+                    <div class="head">
+                        <h2>Residence details</h2><span class="badge gray">Draft</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="field"><label for="name">Hostel name</label><input id="name" name="name"
+                                placeholder="e.g. Unity Hall" required></div>
+                        <div class="field"><label for="location">Location</label><input id="location" name="location"
+                                placeholder="e.g. North Campus" required></div>
+                        <div class="field full"><label for="description">Description</label><textarea id="description"
+                                name="description"
+                                placeholder="Briefly describe the residence, its audience or facilities."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <a class="secondary" href="/hostels">Cancel</a>
+                        <button class="button" type="submit">Create hostel →</button>
+                    </div>
+                </form>
+            </main>
+    </div>
+</body>
+
+</html>

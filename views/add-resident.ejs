@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Register resident | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'residents'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Residents / <strong>Register resident</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Register a resident</h1>
+                        <p>Create the student profile before assigning a room.</p>
+                    </div>
+                </section>
+                <form class="card form-card" action="#" method="post">
+                    <div class="head">
+                        <h2>Resident details</h2><span class="badge gray">Draft</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="field"><label for="name">Full name</label><input id="name" name="name"
+                                placeholder="e.g. Mary N. Nfor" required></div>
+                        <div class="field"><label for="studentId">Student ID</label><input id="studentId"
+                                name="studentId" placeholder="e.g. UBa/26/0001" required></div>
+                        <div class="field"><label for="email">Email address</label><input id="email" name="email"
+                                type="email" placeholder="student@university.edu" required></div>
+                        <div class="field"><label for="phone">Phone number</label><input id="phone" name="phone"
+                                type="tel" placeholder="+237 6•• ••• •••" required></div>
+                    </div>
+                    <div class="form-actions"><a class="secondary" href="/residents">Cancel</a><button class="button"
+                            type="submit">Register resident →</button></div>
+                </form>
+            </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Residents | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'residents'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Management / <strong>Residents</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Resident directory</h1>
+                        <p>Know who is living where, and keep their details current.</p>
+</div><a class="button" href="/residents/new">+ Register resident</a>
+                </section>
+                <section class="card">
+                    <div class="head">
+                        <h2><%= residents.length %> resident<%= residents.length === 1 ? '' : 's' %></h2>
+                        <div class="tools"><input class="search" placeholder="Search name, ID or email"><select
+                                class="filter">
+                                <option>All hostels</option>
+                            </select></div>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Resident</th>
+                                    <th>Student ID</th>
+                                    <th>Residence</th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody><% if (!residents.length) { %><tr><td colspan="6">No residents registered yet.</td></tr><% } %><% residents.forEach((resident) => { %><tr><td><span class="name"><%= resident.name %></span><span class="sub"><%= resident.email %></span></td><td><%= resident.studentId %></td><td><%= resident.booking ? `${resident.booking.room?.hostel?.name || 'Hostel'} · ${resident.booking.room?.roomNumber || 'Room'}` : 'Not allocated' %></td><td><%= resident.phone %></td><td><span class="badge <%= resident.booking ? '' : 'gray' %>"><%= resident.booking ? 'Active' : 'Unallocated' %></span></td><td class="dots"><button type="button" class="edit">Edit</button><button type="button" class="delete">Delete</button></td></tr><% }) %></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+    </div>
+</body>
+
+</html>

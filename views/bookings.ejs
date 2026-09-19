@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Bookings | HostelHub</title><%- include('partials/admin-head') %>
+</head>
+
+<body>
+    <div class="app"><%- include('partials/admin-nav',{page:'bookings'}) %>
+            <main class="main">
+                <header class="top"><span class="crumb">Management / <strong>Bookings</strong></span></header>
+                <section class="welcome">
+                    <div>
+                        <h1>Bookings</h1>
+                        <p>Track check-ins, current stays and completed allocations.</p>
+</div><a class="button" href="/bookings/new">+ Create booking</a>
+                </section>
+                <section class="stats">
+                    <article class="stat"><span>Active stays</span><strong><%= bookings.filter((booking) => booking.status === 'Active').length %></strong></article>
+                    <article class="stat"><span>Total bookings</span><strong><%= bookings.length %></strong></article>
+                    <article class="stat"><span>Completed stays</span><strong><%= bookings.filter((booking) => booking.status === 'Complete').length %></strong></article>
+                </section>
+                <section class="card">
+                    <div class="head">
+                        <h2>Recent bookings</h2>
+                        <div class="tools"><input class="search" placeholder="Search resident or room"><select
+                                class="filter">
+                                <option>Active stays</option>
+                            </select></div>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Resident</th>
+                                    <th>Room</th>
+                                    <th>Check-in</th>
+                                    <th>Check-out</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody><% if (!bookings.length) { %><tr><td colspan="6">No bookings have been created yet.</td></tr><% } %><% bookings.forEach((booking) => { %><tr><td class="name"><%= booking.resident?.name || 'Unknown resident' %></td><td><%= booking.room?.hostel?.name || 'Hostel' %> · <%= booking.room?.roomNumber || 'Room' %></td><td><%= new Date(booking.checkInDate).toLocaleDateString() %></td><td><%= booking.checkOutDate ? new Date(booking.checkOutDate).toLocaleDateString() : '—' %></td><td><span class="badge <%= booking.status === 'Active' ? '' : 'gray' %>"><%= booking.status %></span></td><td class="dots"><button type="button" class="edit">Edit</button><button type="button" class="delete">Delete</button></td></tr><% }) %></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+    </div>
+</body>
+
+</html>
