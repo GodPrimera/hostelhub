@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash')
+const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override')
 const authRoutes = require('./routes/authRoutes')
 const dashboardRoutes = require('./routes/dashboardRoutes')
-const checkAuthenticated = require('./middlewares/checkAuthenticated');
 const path = require('path');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +18,9 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI
+    }),
   cookie: {
     httpOnly: true,
     sameSite: 'lax',
