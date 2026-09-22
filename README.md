@@ -1,10 +1,10 @@
 # Hostel Hub
 
 ## Description
-A hostel management system
+A hostel management system: this is a system that controls how students are checkedIn to the hostel or out of the hostel, this helps organise students and rooms to avoid errors such as double booking or a room containing more students than its capacity.
 
 ## Setup
-1. Clone the repository: run `git clone https://github.com/GodPrimera/expense-tracker.git`
+1. Clone the repository: run `git clone https://github.com/GodPrimera/hostelhub.git`
 2. Install dependencies: run `npm install`
 3. Copy `.env.example` to `.env` and fill in your own values:
    (On Windows: `copy .env.example .env`)
@@ -25,6 +25,7 @@ A hostel management system
 
 - AI was used to generate the UI of the project since the ui was not my topic of concentration and to save time
 
-## URL
+## URLs
 
 - https://hostelhub-itpq.onrender.com/
+- https://github.com/GodPrimera/hostelhub

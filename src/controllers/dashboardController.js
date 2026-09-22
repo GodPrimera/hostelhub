@@ -4,7 +4,7 @@ const Resident = require("../models/resident");
 const Booking = require("../models/booking");
 const mongoose = require("mongoose");
 
-// Rooms that still have at least one free space
+
 const getAvailableRooms = () =>
   Room.find({ $expr: { $lt: ["$occupiedSpaces", "$capacity"] } })
     .populate("hostel")
@@ -239,7 +239,7 @@ exports.addHostel = async (req, res) => {
   }
 };
 
-// Validates room form input. Returns { error } or { values }.
+
 function parseRoomBody(body) {
   const roomNumber = body.roomNumber?.trim();
   const hostel = body.hostel;
@@ -277,7 +277,6 @@ exports.addRoom = async (req, res) => {
   if (error) return fail(error);
 
   try {
-    // Room numbers only need to be unique within the same hostel
     if (
       await Room.findOne({
         roomNumber: values.roomNumber,
@@ -368,7 +367,7 @@ exports.addBooking = async (req, res) => {
   const { room: roomId, checkInDate, checkOutDate } = req.body;
   const formData = { studentId, room: roomId, checkInDate, checkOutDate };
 
-  // Re-render the form with an error and the values the user typed
+
   const fail = async (message) =>
     res.render("add-booking", {
       userName: req.session.userName,
@@ -400,7 +399,6 @@ exports.addBooking = async (req, res) => {
     const resident = await Resident.findOne({ studentId });
     if (!resident) return fail("No resident with this student ID exists.");
 
-    // A resident may have many bookings over time, but only one Active at once
     const activeBooking = await Booking.findOne({
       resident: resident._id,
       status: "Active",
@@ -408,8 +406,7 @@ exports.addBooking = async (req, res) => {
     if (activeBooking)
       return fail("This resident already has an active booking.");
 
-    // Atomically reserve a space: only succeeds if the room still has room.
-    // This prevents two managers from over-booking the last space.
+
     const room = await Room.findOneAndUpdate(
       { _id: roomId, $expr: { $lt: ["$occupiedSpaces", "$capacity"] } },
       { $inc: { occupiedSpaces: 1 } },
@@ -429,7 +426,7 @@ exports.addBooking = async (req, res) => {
         status: "Active",
       });
     } catch (createErr) {
-      // Booking failed, so give the reserved space back
+
       await Room.updateOne({ _id: room._id }, { $inc: { occupiedSpaces: -1 } });
       throw createErr;
     }
@@ -502,7 +499,6 @@ exports.updateResident = async (req, res) => {
             return res.status(404).send('Resident not found');
         }
 
-        // Check whether another resident already uses this student ID
         const existingResident = await Resident.findOne({
             studentId: studentId.trim(),
             _id: { $ne: req.params.id }
