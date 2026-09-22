@@ -24,3 +24,7 @@ A hostel management system
 ## AI assistance
 
 - AI was used to generate the UI of the project since the ui was not my topic of concentration and to save time
+
+## URL
+
+- https://hostelhub-itpq.onrender.com/
