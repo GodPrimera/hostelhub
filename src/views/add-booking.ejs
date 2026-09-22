@@ -15,18 +15,21 @@
                         <p>Assign a registered resident to an available room.</p>
                     </div>
                 </section>
-                <form class="card form-card" action="#" method="post">
+                <form class="card form-card" action="/bookings/new" method="post">
                     <div class="head">
-                        <h2>Booking details</h2><span class="badge gray">Draft</span>
+                        <h2>Booking details</h2><span class="badge gray">New</span>
                     </div>
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <p style="color: var(--danger); margin: 0 0 16px; font-weight: 600;"><%= error %></p>
+                    <% } %>
                     <div class="form-grid">
-                        <div class="field"><label for="StudentId">Resident Student ID</label><input id="resident"
-                                name="studentId" type="text" placeholder="Enter the resident's Student ID"
+                        <div class="field"><label for="studentId">Resident Student ID</label><input id="studentId"
+                                name="studentId" type="text" value="<%= formData.studentId || '' %>" placeholder="Enter the resident's Student ID"
                                 autocomplete="off" required></div>
                         <div class="field"><label for="room">Available room</label><select id="room" name="room"
                                 required>
                                 <option value="">Select a room</option>
-                                <% rooms.forEach((room)=> { %><option value="<%= room._id %>">
+                                <% rooms.forEach((room)=> { %><option value="<%= room._id %>" <%= String(room._id) === formData.room ? 'selected' : '' %>>
                                         <%= room.hostel?.name || 'Hostel' %> · <%= room.roomNumber %> (<%= room.capacity
                                                     - room.occupiedSpaces %> space<%= room.capacity -
                                                         room.occupiedSpaces===1 ? '' : 's' %>)
@@ -34,9 +37,9 @@
                                     <% }) %>
                             </select></div>
                         <div class="field"><label for="checkInDate">Check-in date</label><input id="checkInDate"
-                                name="checkInDate" type="date" required></div>
+                                name="checkInDate" type="date" value="<%= formData.checkInDate || '' %>" required></div>
                         <div class="field"><label for="checkOutDate">Expected check-out</label><input id="checkOutDate"
-                                name="checkOutDate" type="date"></div>
+                                name="checkOutDate" type="date" value="<%= formData.checkOutDate || '' %>"></div>
                     </div>
                     <div class="form-actions"><a class="secondary" href="/bookings">Cancel</a><button class="button"
                             type="submit">Create booking →</button></div>

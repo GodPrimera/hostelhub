@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash')
+const methodOverride = require('method-override')
 const authRoutes = require('./routes/authRoutes')
 const dashboardRoutes = require('./routes/dashboardRoutes')
 const checkAuthenticated = require('./middlewares/checkAuthenticated');
@@ -24,7 +25,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24
   }
 }));
-
+app.use(methodOverride('_method'));
 app.use(flash());
 
 app.use('/', authRoutes);

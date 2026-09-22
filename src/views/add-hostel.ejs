@@ -19,14 +19,17 @@
                     <div class="head">
                         <h2>Residence details</h2><span class="badge gray">Draft</span>
                     </div>
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <p style="color: var(--danger); margin: 0 0 16px; font-weight: 600;"><%= error %></p>
+                    <% } %>
                     <div class="form-grid">
-                        <div class="field"><label for="name">Hostel name</label><input id="name" name="name"
+                        <div class="field"><label for="name">Hostel name</label><input id="name" name="name" value="<%= formData.name || '' %>"
                                 placeholder="e.g. Unity Hall" required></div>
-                        <div class="field"><label for="location">Location</label><input id="location" name="location"
+                        <div class="field"><label for="location">Location</label><input id="location" name="location" value="<%= formData.location || '' %>"
                                 placeholder="e.g. North Campus" required></div>
                         <div class="field full"><label for="description">Description</label><textarea id="description"
                                 name="description"
-                                placeholder="Briefly describe the residence, its audience or facilities."></textarea>
+                                placeholder="Briefly describe the residence, its audience or facilities."><%= formData.description || '' %></textarea>
                         </div>
                     </div>
                     <div class="form-actions">

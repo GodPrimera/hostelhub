@@ -9,6 +9,9 @@
     <div class="app"><%- include('partials/admin-nav',{page:'residents'}) %>
             <main class="main">
                 <header class="top"><span class="crumb">Management / <strong>Residents</strong></span></header>
+                <% if (typeof message !== 'undefined' && message) { %>
+                    <p style="background:#e8f7ef;color:var(--green);border:1px solid #bfe6d0;border-radius:10px;padding:12px 16px;margin:0 0 16px;font-weight:600;"><%= message %></p>
+                <% } %>
                 <section class="welcome">
                     <div>
                         <h1>Resident directory</h1>
@@ -35,7 +38,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody><% if (!residents.length) { %><tr><td colspan="6">No residents registered yet.</td></tr><% } %><% residents.forEach((resident) => { %><tr><td><span class="name"><%= resident.name %></span><span class="sub"><%= resident.email %></span></td><td><%= resident.studentId %></td><td><%= resident.booking ? `${resident.booking.room?.hostel?.name || 'Hostel'} · ${resident.booking.room?.roomNumber || 'Room'}` : 'Not allocated' %></td><td><%= resident.phone %></td><td><span class="badge <%= resident.booking ? '' : 'gray' %>"><%= resident.booking ? 'Active' : 'Unallocated' %></span></td><td class="dots"><button type="button" class="edit">Edit</button><button type="button" class="delete">Delete</button></td></tr><% }) %></tbody>
+                            <tbody><% if (!residents.length) { %><tr><td colspan="6">No residents registered yet.</td></tr><% } %><% residents.forEach((resident) => { %><tr><td><span class="name"><%= resident.name %></span><span class="sub"><%= resident.email %></span></td><td><%= resident.studentId %></td><td><%= resident.booking ? `${resident.booking.room?.hostel?.name || 'Hostel'} · ${resident.booking.room?.roomNumber || 'Room'}` : 'Not allocated' %></td><td><%= resident.phone %></td><td><span class="badge <%= resident.booking ? '' : 'gray' %>"><%= resident.booking ? 'Active' : 'Unallocated' %></span></td><td class="dots"><a href="/residents/<%= resident._id %>/edit" class="edit">Edit</a><button type="button" class="delete">Delete</button></td></tr><% }) %></tbody>
                         </table>
                     </div>
                 </section>

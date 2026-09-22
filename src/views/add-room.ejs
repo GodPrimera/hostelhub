@@ -11,7 +11,7 @@
                 <header class="top"><span class="crumb">Rooms / <strong>Add room</strong></span></header>
                 <section class="welcome">
                     <div>
-                        <% const isEdit=!!room; %>
+                        <% const isEdit = !!room; const f = Object.assign({}, room || {}, formData || {}); %>
                             <h1>
                                 <%= isEdit ? 'Edit Room' : 'Add a room' %>
                             </h1>
@@ -20,19 +20,21 @@
                 </section>
                 <form class="card form-card" action="<%= room ? '/rooms/' + room._id : '/rooms' %>" method="post">
                     <div class="head">
-                        <h2>Room details</h2><span class="badge gray">Draft</span>
+                        <h2>Room details</h2><span class="badge gray"><%= isEdit ? 'Editing' : 'New' %></span>
                     </div>
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <p style="color: var(--danger); margin: 0 0 16px; font-weight: 600;"><%= error %></p>
+                    <% } %>
                     <div class="form-grid">
                         <div class="field"><label for="roomNumber">Room number</label><input id="roomNumber"
-                                name="roomNumber" placeholder="e.g. UH-204" value="<%= room ? room.roomNumber : '' %>"
+                                name="roomNumber" placeholder="e.g. UH-204" value="<%= f.roomNumber || '' %>"
                                 required></div>
                         <div class="field"><label for="hostel">Hostel</label><select id="hostel" name="hostel" required>
                                 <option value="">Select a hostel</option>
 
                                 <% hostels.forEach((hostel)=> { %>
 
-                                    <option value="<%= hostel._id %>" <%=room &&
-                                        String(room.hostel)===String(hostel._id) ? 'selected' : '' %>
+                                    <option value="<%= hostel._id %>" <%= String(f.hostel) === String(hostel._id) ? 'selected' : '' %>
                                         >
                                         <%= hostel.name %>
                                     </option>
@@ -41,12 +43,12 @@
                             </select></div>
                         <div class="field"><label for="capacity">Room capacity</label><input id="capacity"
                                 name="capacity" type="number" min="1" placeholder="e.g. 4"
-                                value="<%= room ? room.capacity : '' %>" required></div>
+                                value="<%= f.capacity || '' %>" required></div>
                         <div class="field"><label for="occupiedSpaces">Occupied spaces</label><input id="occupiedSpaces"
-                                name="occupiedSpaces" type="number" min="0" value="<%= room ? room.occupiedSpaces : 0 %>" required></div>
+                                name="occupiedSpaces" type="number" min="0" value="<%= f.occupiedSpaces || 0 %>" required></div>
                     </div>
                     <div class="form-actions"><a class="secondary" href="/rooms">Cancel</a><button class="button"
-                            type="submit">Create room →</button></div>
+                            type="submit"><%= isEdit ? 'Save changes →' : 'Create room →' %></button></div>
                 </form>
             </main>
     </div>
